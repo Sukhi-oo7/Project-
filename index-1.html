@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>funny Jokes</title>
+<style>
+    *{
+    margin: 0%;
+    padding: 0%;
+    box-sizing: border-box;
+}
+body{
+    background-color: #ADD8E6;
+    font-family: sans-serif;
+    font-size: larger;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.container{
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    display: flex;
+    padding: 40px;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 500px;
+    height: 300px;
+    border-radius: 20px;
+}
+h2{
+   position: absolute;
+   top: 60px;  
+}
+#btn{
+    padding: 10px 30px 10px 30px;
+    border: none;
+    border-radius: 10px;
+    background-color: #FFD700;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+#btn:hover{
+    background-color: #f0cd08;
+    box-shadow: none;
+    cursor: pointer;
+}
+</style>
+</head>
+<body>
+    <h2>JOKES with API</h2>
+    <div class="container">
+        <div id="jokes">
+           JOKE is Loading.... 
+        </div>
+        <button id="btn"> <b> Next</b></button>
+    </div>
+    <script>
+        const jokes = document.getElementById('jokes')
+        const btn = document.getElementById('btn')
+
+        const genrate = async() => {
+            try{
+                const setHeader= {
+                    headers : {
+                        Accept : "application/json"
+                    }
+                }
+                const res = await fetch(" https://icanhazdadjoke.com/" ,setHeader)
+                const data = await res.json()
+                jokes.innerHTML = data.joke
+            }catch(err){
+                console.log(`The error is ${err}`)
+            }
+        }
+        btn.addEventListener('click', genrate)
+        genrate()
+
+    </script>
+</body>
+</html>
